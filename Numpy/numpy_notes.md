@@ -6,3 +6,8 @@
     Multi-dimensional arrays (ndarrays)
     Broadcasting for element-wise operations
     Vectorized operations for speed
+
+> > > Performance and Memory
+
+    NumPy arrays consume less memory.
+    Operations are faster because they use optimized C code.
