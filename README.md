@@ -1,1 +1,1 @@
-My Machine Learning journey Notes and Models Implementaton.
+My Machine Learning journey Notes and Models Implementation.
