@@ -31,3 +31,11 @@ class LinearRegression:
             
     def predict(self, X):
         return np.dot(X, self.weights) + self.bias
+    
+    
+if __name__ == "__main__":
+    
+    # Generate sample data
+    np.random.seed(0)
+    X = 2 * np.random.rand(100, 1)
+    Y = 4 + 3 * X + np.random.randn(100, 1)
