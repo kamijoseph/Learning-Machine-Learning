@@ -11,4 +11,20 @@ class LinearRegression:
         self.bias = None
         
     def fit(self, X, Y):
-        pass
+        # Initialize parameters
+        n_samples, n_features = X.shape
+        self.weights = np.zeros(n_features)
+        self.bias = 0
+        
+        # Gradient descent
+        for _ in range(self.n_iterations):
+            # Linear equation y = wx + b
+            Y_predicted = np.dot(X, self.weights) + self.bias
+            
+            # Calculate gradients
+            dw = (1/n_samples) * np.dot(X.T, (Y_predicted - Y))
+            db = (1/n_samples) * np.sum(Y_predicted - Y)
+            
+            # Update parameters
+            self.weights -= self.learning_rate * dw
+            self.bias -= self.learning_rate * db
