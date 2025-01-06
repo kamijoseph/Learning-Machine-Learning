@@ -28,3 +28,6 @@ class LinearRegression:
             # Update parameters
             self.weights -= self.learning_rate * dw
             self.bias -= self.learning_rate * db
+            
+    def predict(self, X):
+        return np.dot(X, self.weights) + self.bias
