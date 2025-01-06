@@ -1,6 +1,5 @@
-
-# Simple Linear Regression
 import numpy as np
+
 import matplotlib.pyplot as plt
 
 class LinearRegression:
@@ -10,20 +9,23 @@ class LinearRegression:
         self.weights = None
         self.bias = None
         
-    def fit(self, X, Y):
+    def fit(self, X, y):
         # Initialize parameters
         n_samples, n_features = X.shape
         self.weights = np.zeros(n_features)
         self.bias = 0
         
+        # Reshape y to ensure it is a column vector
+        y = y.flatten()
+        
         # Gradient descent
         for _ in range(self.n_iterations):
-            # Linear equation y = wx + b
-            Y_predicted = np.dot(X, self.weights) + self.bias
+            # Linear equation: y = wx + b
+            y_predicted = np.dot(X, self.weights) + self.bias
             
             # Calculate gradients
-            dw = (1/n_samples) * np.dot(X.T, (Y_predicted - Y))
-            db = (1/n_samples) * np.sum(Y_predicted - Y)
+            dw = (1/n_samples) * np.dot(X.T, (y_predicted - y).flatten())
+            db = (1/n_samples) * np.sum(y_predicted - y)
             
             # Update parameters
             self.weights -= self.learning_rate * dw
@@ -31,11 +33,25 @@ class LinearRegression:
             
     def predict(self, X):
         return np.dot(X, self.weights) + self.bias
-    
-    
+
+# Example usage
 if __name__ == "__main__":
-    
     # Generate sample data
     np.random.seed(0)
     X = 2 * np.random.rand(100, 1)
-    Y = 4 + 3 * X + np.random.randn(100, 1)
+    y = 4 + 3 * X + np.random.randn(100, 1)
+    
+    # Create and train the model
+    model = LinearRegression(learning_rate=0.01, n_iterations=1000)
+    model.fit(X, y)
+    
+    # Make predictions
+    y_pred = model.predict(X)
+    
+    # Plot results
+    plt.scatter(X, y, color='blue', label='Data')
+    plt.plot(X, y_pred, color='red', label='Prediction')
+    plt.xlabel('X')
+    plt.ylabel('y')
+    plt.legend()
+    plt.show()
