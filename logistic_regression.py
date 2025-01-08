@@ -23,3 +23,14 @@ X = np.column_stack((X1, X2))
 data = pd.DataFrame(data={"Feature1": X1, "Feature2": X2, "Target": y})
 data.to_csv("synthetic_data1.csv", index=False)
 print("Data saved to synthetic_data1.csv")
+
+# The Logistic Regression algorithm
+class LogisticRegression:
+    def __init__(self, learning_rate=0.01, n_iterations = 1000):
+        self.learning_rate = learning_rate
+        self.n_iterations = n_iterations
+        self.weights = None
+        self.bias = None
+        
+    def sigmoid(self, z):
+        return 1/(1 + np.exp(-z))
