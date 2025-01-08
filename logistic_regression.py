@@ -55,3 +55,19 @@ class LogisticRegression:
         y_predicted = self.sigmoid(linear_model)
         return [1 if i > 0.5 else 0 for i in y_predicted]
     
+# Load the data and train the model
+data = pd.read_csv('synthetic_data1.csv')
+X = data[['Feature1', 'Feature2']].values
+y = data['Target'].values
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train the model
+model = LogisticRegression(learning_rate=0.01, n_iterations=1000)
+model.fit(X_train, y_train)
+
+# Evaluating the model
+predictions = model.predict(X_test)
+accuracy = accuracy_score(y_test, predictions)
+print(f"Model Accuracy: {accuracy * 100:.2f}%")
