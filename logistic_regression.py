@@ -49,3 +49,9 @@ class LogisticRegression:
             
             self.weights -= self.learning_rate * dw
             self.bias -= self.learning_rate * db
+            
+    def predict(self, X):
+        linear_model = np.dot(X, self.weights) + self.bias
+        y_predicted = self.sigmoid(linear_model)
+        return [1 if i > 0.5 else 0 for i in y_predicted]
+    
