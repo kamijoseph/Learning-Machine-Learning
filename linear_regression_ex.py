@@ -16,8 +16,8 @@ reg = LinearRegression()
 reg.fit(X_train, y_train)
 predictions = reg.predict(X_test)
 
-def mse(y_test, predictions):
+def calculate_mse(y_test, predictions):
     return np.mean((y_test-predictions) ** 2)
 
-mse = mse(y_test, predictions)
-print(mse)
+mse_value = calculate_mse(y_test, predictions)
+print(f"The Mean Squared Number is: {mse_value}")
