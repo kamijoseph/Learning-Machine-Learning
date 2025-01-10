@@ -10,7 +10,19 @@ class LinearRegression:
         bias = None
     
     def fit(self, X, y):
-        pass
+        n_samples, n_features = X.shape
+        self.weights = 0
+        self.bias = 0
+        
+        for _ in range(n_iterations=1000):
+            y_predict = np.dot(X, self.weights) + self.bias
+            
+            dw = (1/n_samples) * np.dot(X.T (y_predict-y))
+            db = (1/n_samples) * np.sum(y_predict-y)
+            
+            # Update Weights and Bias
+            self.weights = self.weights - self.learning_rate * dw
+            self.bias = self.bias - self.learning_rate * db
     
     def predict(self, X):
         pass
