@@ -35,3 +35,23 @@ class Regularization:
             return self.elasticNetPenalty(weights)
         else:
             raise ValueError("Invalid regularzation type. Pick(l1/ l2/ elasticNet)")
+        
+# Application Use Case
+if __name__ == "__main__":
+    # Synth weights
+    weights = np.array([0.5, -1.2, 3.0, 0.0, -0.7])
+    
+    # L1 Regularization
+    l1Regz = Regularization(regz_type="l1", alpha=0.1)
+    l1Penal = l1Regz.penaltyChoice(weights)
+    print(f"L1 Penalty: {l1Penal}")
+    
+    # L2 Regularization
+    l2Regz = Regularization(regz_type="l2", alpha=0.1)
+    l2Penal = l2Regz.penaltyChoice(weights)
+    print(f"L2 Penalty: {l2Penal}")
+    
+    # Elastic Net Regularization
+    elasticNetRegz = Regularization(regz_type="elasticNet", alpha=0.1, l1Ratio=0.7)
+    elasticNetPenal = elasticNetRegz.penaltyChoice(weights)
+    print(f"Elastic Net Penalty: {elasticNetPenal}")
