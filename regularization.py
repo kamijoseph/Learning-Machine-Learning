@@ -24,3 +24,14 @@ class Regularization:
         l1Comp = self.l1ratio * self.l1Penalty(weights)
         l2Comp = (1 - self.l1Ratio) * self.l2Penalty(weights)
         return l1Comp + l2Comp
+    
+    # Compute choiced Penalties from the ones above
+    def penaltyChoice(self, weights):
+        if self.regz_type == "l1":
+            return self.l1Penalty(weights)
+        elif self.regz_type == "l2":
+            return self.l2Penalty(weights)
+        elif self.regz_type == "elasticNet":
+            return self.elasticNetPenalty(weights)
+        else:
+            raise ValueError("Invalid regularzation type. Pick(l1/ l2/ elasticNet)")
