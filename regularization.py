@@ -12,7 +12,7 @@ class Regularization:
     # l1 Penalty Function
     def l1Penalty(self, weights):
         penalty = np.sum(np.abs(weights))
-        return self.apha * penalty
+        return self.alpha * penalty
     
     # l2 penalty Function'
     def l2Penalty(self, weights):
@@ -21,7 +21,7 @@ class Regularization:
     
     # Elastic Net Penalty Function
     def elasticNetPenalty(self, weights):
-        l1Comp = self.l1ratio * self.l1Penalty(weights)
+        l1Comp = self.l1Ratio * self.l1Penalty(weights)
         l2Comp = (1 - self.l1Ratio) * self.l2Penalty(weights)
         return l1Comp + l2Comp
     
