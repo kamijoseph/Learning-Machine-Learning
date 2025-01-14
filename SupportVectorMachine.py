@@ -33,3 +33,15 @@ class SupportVectorMachine:
     def predict(self, X):
         approximate = np.dot(X, self.weights) - self.bias
         return np.sign(approximate)
+    
+# Synthdata.....................
+np.random.seed(42)
+X = np.random.randn(100, 2)
+y = np.array([1 if x[0] * 2 + x[1] > 1 else 0 for x in X]) 
+
+# Visualizing....................
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap='coolwarm')
+plt.title("Synthetic Data")
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.show
