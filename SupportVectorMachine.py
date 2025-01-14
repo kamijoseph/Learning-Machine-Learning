@@ -51,7 +51,7 @@ svm = SupportVectorMachine(learningRate=.001, lambdaParameter=0.01, n_iterations
 svm.fit(X, y)
 
 # Visualizing desicion bound................
-def PlotDesBound(X, y, model):
+def plotDesBound(X, y, model):
     x0 = np.linspace(min(X[:, 0]), max(X[:, 0]), 100)
     x1 = -(model.weights[0] * x0 + model.bias) / model.weights[1]
     plt.scatter(X[:, 0], X[:, 1], c=y, cmap='coolwarm')
@@ -61,3 +61,9 @@ def PlotDesBound(X, y, model):
     plt.ylabel("Feature 2")
     plt.legend()
     plt.show()
+plotDesBound()
+
+# Evaluating the predictions.................
+predictions = svm.predict(X)
+accuracy = np.mean(predictions == np.where(y == 0, -1, 1))
+print(f"Accuracy: {accuracy * 100:.2f}%")
