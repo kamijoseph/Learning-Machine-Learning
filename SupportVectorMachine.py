@@ -22,9 +22,14 @@ class SupportVectorMachine:
         for _ in range(self.n_iterations):
             for idx, x_i in enumerate(X):
                 condition = y_[idx] * (np.dot(x_i, self.weights) - self.bias) >= 1
+                
+                # point correctly classified ?
                 if condition:
                     self.weights = self.learningRate * (2 * self.lambdaParameter * self.weights)
+                # incorrectly classified ?
                 else:
+                    self.weights -= self.learningRate * (2 * self.lambdaParameter * self.weights - np.dot(x_i, y_[idx]))
     
-    def predict(self):
-        pass
+    def predict(self, X):
+        approximate = np.dot(X, self.weights) - self.bias
+        return np.sign(approximate)
