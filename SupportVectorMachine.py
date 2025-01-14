@@ -47,7 +47,7 @@ plt.ylabel("Feature 2")
 plt.show
 
 # Train dragon, sorry Train Model
-svm = SupportVectorMachine(learningRate=.001, lambdaParameter=0.01, n_iterations=1000)
+svm = SupportVectorMachine(learningRate=0.001, lambdaParameter=0.01, n_iterations=1000)
 svm.fit(X, y)
 
 # Visualizing desicion bound................
@@ -61,7 +61,7 @@ def plotDesBound(X, y, model):
     plt.ylabel("Feature 2")
     plt.legend()
     plt.show()
-plotDesBound()
+plotDesBound(X, y, svm)
 
 # Evaluating the predictions.................
 predictions = svm.predict(X)
