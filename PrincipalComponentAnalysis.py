@@ -17,10 +17,14 @@ def standardizeData(data):
 x_standardized = standardizeData(X)
 
 #Covariance Matrix
-def CompCovMatrix(data):
+def compCovMatrix(data):
     n_samples = data.shape[0]
     covarianceMatrix = (1 / (n_samples - 1)) * np.dot(data.T, data)
     return covarianceMatrix
-covarianceMatrix = CompCovMatrix(x_standardized)
+covarianceMatrix = compCovMatrix(x_standardized)
 
 #Eigen vectors and Values go brrrr!
+def eigenComp(matrix):
+    eigenValues, eigenVectors = np.linalg.eig(matrix)
+    return eigenValues, eigenVectors
+eigenValues, eigenVectors = eigenComp(covarianceMatrix)
