@@ -15,3 +15,12 @@ def standardizeData(data):
     std = np.std(data, axis=0)
     return (data - mean) / std
 x_standardized = standardizeData(X)
+
+#Covariance Matrix
+def CompCovMatrix(data):
+    n_samples = data.shape[0]
+    covarianceMatrix = (1 / (n_samples - 1)) * np.dot(data.T, data)
+    return covarianceMatrix
+covarianceMatrix = CompCovMatrix(x_standardized)
+
+#Eigen vectors and Values go brrrr!
