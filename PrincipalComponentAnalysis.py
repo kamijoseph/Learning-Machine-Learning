@@ -45,3 +45,14 @@ X_pca = mapData(x_standardized, topEigenVectors)
 
 # visualizing original and mapped data
 plt.figure(figsize=(10, 5))
+
+# Original Data
+plt.subplot(1, 2, 1)
+plt.scatter(X_standardized[:, 0], X_standardized[:, 1], alpha=0.7, label="Original Data")
+plt.title("Original Data")
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.axhline(0, color='gray', linestyle='--', linewidth=0.7)
+plt.axvline(0, color='gray', linestyle='--', linewidth=0.7)
+plt.grid(True)
+plt.legend()
