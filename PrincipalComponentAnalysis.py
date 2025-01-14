@@ -28,3 +28,11 @@ def eigenComp(matrix):
     eigenValues, eigenVectors = np.linalg.eig(matrix)
     return eigenValues, eigenVectors
 eigenValues, eigenVectors = eigenComp(covarianceMatrix)
+
+#sorting Eigenvalues, selecting top Components
+def topComponent(eigenValues, eigenVectors, numComponents):
+    sortedInd = np.argsort(eigenValues)[::-1]
+    topEigenValues = eigenValues[sortedInd[:numComponents]]
+    topEigenVectors = eigenVectors[:, sortedInd[:numComponents]]
+    return topEigenValues, topEigenVectors
+topEigenValues, topEigenVectors = topComponent(eigenValues, eigenVectors, numComponents=1)
