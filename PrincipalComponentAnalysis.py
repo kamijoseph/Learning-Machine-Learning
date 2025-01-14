@@ -36,3 +36,12 @@ def topComponent(eigenValues, eigenVectors, numComponents):
     topEigenVectors = eigenVectors[:, sortedInd[:numComponents]]
     return topEigenValues, topEigenVectors
 topEigenValues, topEigenVectors = topComponent(eigenValues, eigenVectors, numComponents=1)
+
+#mapping the data
+def mapData(data, eigenVectors):
+    return np.dot(data, eigenVectors)
+
+X_pca = mapData(x_standardized, topEigenVectors)
+
+# visualizing original and mapped data
+plt.figure(figsize=(10, 5))
