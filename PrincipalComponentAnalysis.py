@@ -1,5 +1,5 @@
 
-# Implementing Principal Component Analysis
+# Implementing Principal Component Analysis and Visualizing it
 import numpy as np
 import matplotlib.pyplot as plt
 
