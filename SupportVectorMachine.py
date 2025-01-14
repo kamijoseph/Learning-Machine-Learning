@@ -45,3 +45,19 @@ plt.title("Synthetic Data")
 plt.xlabel("Feature 1")
 plt.ylabel("Feature 2")
 plt.show
+
+# Train dragon, sorry Train Model
+svm = SupportVectorMachine(learningRate=.001, lambdaParameter=0.01, n_iterations=1000)
+svm.fit(X, y)
+
+# Visualizing desicion bound................
+def PlotDesBound(X, y, model):
+    x0 = np.linspace(min(X[:, 0]), max(X[:, 0]), 100)
+    x1 = -(model.weights[0] * x0 + model.bias) / model.weights[1]
+    plt.scatter(X[:, 0], X[:, 1], c=y, cmap='coolwarm')
+    plt.plot(x0, x1, '-k', label="Decision Boundary")
+    plt.title("Support Vector Machine Decision Boundary")
+    plt.xlabel("Feature 1")
+    plt.ylabel("Feature 2")
+    plt.legend()
+    plt.show()
