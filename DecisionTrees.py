@@ -5,11 +5,15 @@ from collections import Counter
 
 class DecisionTrees:
     def __init__(self, maxDepth=None):
-        pass
+        self.maxDepth = maxDepth
+        self.tree = None
     
     class Node:
-        def __init__(self):
-            pass
+        def __init__(self, feature=None, threshhold=None, left=None, right=None):
+            self.feature = feature
+            self.threshhold = threshhold
+            self.left = left
+            self.right = right
     
     def gini(self):
         pass
