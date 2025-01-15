@@ -27,8 +27,10 @@ class DecisionTrees:
         rightIdxs = np.where(X[:, feature] > threshhold)[0]
         return leftIdxs, rightIdxs
     
-    def bestSplit(self):
-        pass
+    def bestSplit(self, X, y, feature, threshhold):
+        n_samples, n_features = X.shape
+        bestGini = float('inf')
+        split = None
     
     def buildTree(self):
         pass
