@@ -31,6 +31,17 @@ class DecisionTrees:
         n_samples, n_features = X.shape
         bestGini = float('inf')
         split = None
+        
+        for feature in range (n_features):
+            threshholds = np.unique(X[:, feature])
+            for threshold in threshholds:
+                leftIdxs, rightIdxs = self.split(X, y, feature, threshhold)
+                
+                if len(leftIdxs) == 0 or len(rightIdxs) == 0:
+                    continue
+                
+                leftGini = self.gini(y[leftIdxs])
+                rightGini = self.gini(y[rightIdxs])
     
     def buildTree(self):
         pass
