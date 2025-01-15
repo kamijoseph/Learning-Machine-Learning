@@ -2,6 +2,10 @@
 # Decision trees algorithm from scratch
 import numpy as np
 from collections import Counter
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
 
 class DecisionTrees:
     def __init__(self, maxDepth=None):
@@ -75,8 +79,13 @@ class DecisionTrees:
     def fit(self, X, y):
         self.tree = self.buildTree(X, y)
     
-    def traverseTree(self):
-        pass
+    #traversing tree fo predictions
+    def traverseTree(self, x, node):
+        if node.value is not None:
+            return node.value
+        if x[node.feature] <= node.threshold:
+            return self.traverseTree(x, node.left)
+        return self.traverseTree(x, node.right)
     
-    def predict(self):
-        pass
+    def predict(self, X):
+        return np.array([self.traverseTree(x, self.tree) for x in X])
