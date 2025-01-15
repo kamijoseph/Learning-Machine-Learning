@@ -15,8 +15,12 @@ class DecisionTrees:
             self.left = left
             self.right = right
     
-    def gini(self):
-        pass
+    # Genie impurity function, haha
+    def gini(self, y):
+        classCount = Counter(y)
+        n_samples = len(y)
+        gini = 1.0 - sum((count / n_samples) ** 2 for count in classCount.values())
+        return gini
     
     def split(self):
         pass
