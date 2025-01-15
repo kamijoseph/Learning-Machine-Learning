@@ -54,11 +54,26 @@ class DecisionTrees:
                     }
         return split
     
-    def buildTree(self):
-        pass
-    
-    def fit(self):
-        pass
+    # Build tree, yk recursively
+    def buildTree(self, X, y, depth=0):
+        n_samples, n_features = X.shape
+        n_labels = len(set(y))
+        if n_labels == 1 or depth == self.maxDepth or n_samples == 0:
+            commonLabel = Counter(y).most_common(1)[0][0]
+            return self.Node(value=commonLabel)
+        
+        split = self.bestSplit(X, y)
+        if not split:
+            commonLabel = Counter(y).most_common(1)[0][0]
+            return self.Node(value=commonLabel)
+
+        leftSubTree = self.buildTree(X[split['leftIdxs']], y[split['leftIdxs']], depth + 1)
+        rightSubTree = self.buildTree(X[split['rightIdxs']], y[split['rightIdxs']], depth + 1)
+        
+        return self.Node(feature=split['feature'], threshold=split['threshold'], left=leftSubTree, right=rightSubTree)
+        
+    def fit(self, X, y):
+        self.tree = self.buildTree(X, y)
     
     def traverseTree(self):
         pass
