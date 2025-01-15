@@ -22,8 +22,10 @@ class DecisionTrees:
         gini = 1.0 - sum((count / n_samples) ** 2 for count in classCount.values())
         return gini
     
-    def split(self):
-        pass
+    def split(self, X, y, feature, threshhold):
+        leftIdxs = np.where(X[:, feature] <= threshhold)[0]
+        rightIdxs = np.where(X[:, feature] > threshhold)[0]
+        return leftIdxs, rightIdxs
     
     def bestSplit(self):
         pass
