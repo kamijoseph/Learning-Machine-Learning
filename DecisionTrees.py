@@ -89,3 +89,15 @@ class DecisionTrees:
     
     def predict(self, X):
         return np.array([self.traverseTree(x, self.tree) for x in X])
+
+# testing with some scikit data
+if __name__ == "__main__":
+    X, y = make_classification(n_samples=200, n_features=2, n_classes=2, n_informative=2, n_redundant=0, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    model = DecisionTrees(max_depth=3)
+    model.fit(X_train, y_train)
+
+    predictions = model.predict(X_test)
+    accuracy = accuracy_score(y_test, predictions)
+    print(f"Model Accuracy: {accuracy * 100:.2f}%")
