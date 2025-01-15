@@ -42,6 +42,17 @@ class DecisionTrees:
                 
                 leftGini = self.gini(y[leftIdxs])
                 rightGini = self.gini(y[rightIdxs])
+                
+                weightedGini = (len(leftIdxs) * leftGini + len(rightIdxs) * rightGini) / n_samples
+                if weightedGini < bestGini:
+                    bestGini = weightedGini
+                    split = {
+                        'feature': feature,
+                        'threshhold': threshhold,
+                        'leftIdxs': leftIdxs,
+                        'rightIdxs': rightIdxs
+                    }
+        return split
     
     def buildTree(self):
         pass
