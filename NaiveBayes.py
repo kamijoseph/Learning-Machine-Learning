@@ -5,7 +5,9 @@ from collections import defaultdict
 
 class NaiveBayes:
     def __init__(self):
-        pass
+        self.classPriors = {}
+        self.featureLikelihoods = defaultdict(lambda: defaultdict(float))
+        self.classes = []
     
     def fit(self):
         pass
