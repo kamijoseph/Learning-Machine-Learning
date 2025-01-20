@@ -37,6 +37,6 @@ if __name__ == "__main__":
     predictions = knn.predict(X_test)
 
     print("training data (features):\n", X_train)
-    print("training labels:\n", y_train)
-    print("test data (features):\n", X_test)
-    print("predicted labels:\n", predictions)
+    print("\ntraining labels:\n", y_train)
+    print("\ntest data (features):\n", X_test)
+    print("\npredicted labels:\n", predictions)
