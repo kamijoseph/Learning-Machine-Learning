@@ -27,8 +27,13 @@ class NaiveBayes:
                 self.featureLikelihoods[cls][featureIdx] = (mean, variance)
                 
     
-    def calculateLikelihood(self):
-        pass
+    def calculateLikelihood(self, x, mean,variance):
+        # calculating using gaussian probability density function
+        eps = 1e-9
+        coefficient = 1.0 / np.sqrt(2.0 * np.pi * (variance + eps))
+        exponent = np.exp(-((x - mean) ** 2) / (2.0 * (variance + eps)))
+        return coefficient * exponent
+        
     
     def calculatePosterior(self):
         pass
