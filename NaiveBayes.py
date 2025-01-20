@@ -35,8 +35,21 @@ class NaiveBayes:
         return coefficient * exponent
         
     
-    def calculatePosterior(self):
-        pass
+    def calculatePosterior(self, x):
+        # Poterior probability for each class given a sample x
+        posteriors = {}
+        for cls in self.classes:
+            prior = np.log(self.classPriors[cls])
+            likelihood = 0
+            for featureIdx, featureValue in enumerate(x):
+                mean, variance = self.featureLikelihoods[cls][featureIdx]
+                likelihood +=np.log((self.calculateLikelihood(featureValue, mean, variance)))
+            posteriors[cls] = prior + likelihood
+        return posteriors
     
-    def predict(self):
-        pass
+    def predict(self, X):
+        predictions = []
+        for x in X:
+            posteriors = self.calculatePosterior(x)
+            predictions.append(max(posteriors, key=posteriors.get))
+        return np.array(predictions)
