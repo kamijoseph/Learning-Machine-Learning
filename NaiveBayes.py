@@ -53,3 +53,23 @@ class NaiveBayes:
             posteriors = self.calculatePosterior(x)
             predictions.append(max(posteriors, key=posteriors.get))
         return np.array(predictions)
+    
+#Working with synthetic data
+np.random.seed(42)
+X = np.random.rand(100, 2)  # 100 samples, 2 features
+y = np.array([0 if x[0] + x[1] < 1 else 1 for x in X])
+
+split_idx = int(0.8 * len(X))
+X_train, X_test = X[:split_idx], X[split_idx:]
+y_train, y_test = y[:split_idx], y[split_idx:]
+
+#Training and evaluating the model
+model = NaiveBayes()
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+
+#Calculate the accuracy
+accuracy = np.mean(predictions == y_test)
+print(f"Accuracy: {accuracy * 100:.2f}%")
+
+# results = 95%
