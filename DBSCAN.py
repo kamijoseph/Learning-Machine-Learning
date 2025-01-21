@@ -5,8 +5,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class DBSCAN:
-    def __init__(self):
-        pass
+    def __init__(self, eps=0.5, minSamples=5):
+        self.eps = eps
+        self.minSamples = minSamples
+        self.labels = None
     
     def fit(self):
         pass
