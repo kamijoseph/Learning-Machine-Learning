@@ -49,4 +49,20 @@ class DBSCAN:
     
     def predict(self):
         return self.labels
-    
+
+# generating and using synthetic data with sklearn
+from sklearn.datasets import make_moons
+X, _ = make_moons(n_samples=300, noise=0.05, random_state=42)
+
+# fitting the model
+model = DBSCAN(eps=0.2, minSamples=5)
+model.fit(X)
+labels = model.predict()
+
+# plotting results
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis', s=50)
+plt.title("DBSCAN clustering")
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.colorbar(label="Cluster Label")
+plt.show()
