@@ -25,13 +25,27 @@ class DBSCAN:
             else:
                 self.expandCluster(X, i, neighbors, clusterId)
                 clusterId += 1
-                
     
-    def regionQuery(self):
-        pass
+    def regionQuery(self, X, pointIdx):
+        distances = np.linalg.norm(X - X[pointIdx], axis=1)
+        return np.where(distances <= self.eps)[0]
     
-    def expandCluster(self):
-        pass
+    def expandCluster(self, X, pointIdx, neighbors, clusterId):
+        self.labels[pointIdx] = clusterId
+        queue = deque(neighbors)
+        while queue:
+            neighborIdx = queue.popleft()
+            
+            if self.labels[neighborIdx] == -1:
+                self.labels[neighborIdx] = clusterId
+            
+            if self.labels[neighborIdx] != -1:
+                continue
+            self.labels[neighborIdx] = clusterId
+            
+            newNeighbours = self.regionQuery(X, neighborIdx)
+            if len(newNeighbours) >= self.minSamples:
+                queue.extend(newNeighbours)
     
     def predict(self):
-        pass
+        return self.labels
