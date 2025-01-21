@@ -10,8 +10,22 @@ class DBSCAN:
         self.minSamples = minSamples
         self.labels = None
     
-    def fit(self):
-        pass
+    def fit(self, X):
+        n_samples = X.shape[0]
+        self.labels = -np.ones(n_samples)
+        clusterId = 0
+        
+        for i in range(n_samples):
+            if self.labels[i] != -1:
+                continue
+            
+            neighbors = self.regionQuery(X, i)
+            if len(neighbors) < self.minSamples:
+                self.labels[i] = -1
+            else:
+                self.expandCluster(X, i, neighbors, clusterId)
+                clusterId += 1
+                
     
     def regionQuery(self):
         pass
