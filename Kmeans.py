@@ -11,8 +11,9 @@ class KMeans:
         self.centroids = None
     
     def initializeCentroids(self, X):
-        indices = np.random.choice(self.X.shape[0], self.n_clusters, replace=False)
+        indices = np.random.choice(X.shape[0], self.n_clusters, replace=False)
         return X[indices]
+
     
     def calculateDistance(self, X, centroids):
         distances = np.sqrt(((X[:, np.newaxis, :] - centroids) ** 2).sum(axis=2))
@@ -36,10 +37,10 @@ class KMeans:
         distances = self.calculateDistance(X, self.centroids)
         return np.argmin(distances, axis=1)
 
-# Step 2: Generate Synthetic Data
+#Synthetic Data
 np.random.seed(42)
 
-# Create synthetic data with 3 clusters
+#3 clusters
 cluster1 = np.random.normal(loc=[2, 2], scale=0.5, size=(50, 2))
 cluster2 = np.random.normal(loc=[8, 8], scale=0.5, size=(50, 2))
 cluster3 = np.random.normal(loc=[5, 12], scale=0.5, size=(50, 2))
@@ -54,8 +55,8 @@ kmeans.fit(X)
 plt.figure(figsize=(8, 6))
 colors = ['r', 'g', 'b']
 for k in range(3):
-    cluster_points = X[kmeans.cluster_assignments == k]
-    plt.scatter(cluster_points[:, 0], cluster_points[:, 1], c=colors[k], label=f'Cluster {k+1}')
+    clusterPoints = X[kmeans.clusters == k]
+    plt.scatter(clusterPoints[:, 0], clusterPoints[:, 1], c=colors[k], label=f'Cluster {k+1}')
 
 plt.scatter(kmeans.centroids[:, 0], kmeans.centroids[:, 1], c='black', s=200, marker='X', label='Centroids')
 plt.title("K-Means Clustering")
