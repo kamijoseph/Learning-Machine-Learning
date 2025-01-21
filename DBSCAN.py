@@ -49,3 +49,4 @@ class DBSCAN:
     
     def predict(self):
         return self.labels
+    
