@@ -16,7 +16,7 @@ class GaussianMixtureModel:
         n_samples, n_features = self.X.shape
         self.weights = np.ones(self.n_components) / self.n_components
         self.means = X[np.random.choice(n_samples, self.n_components, replace=False)]
-        self.covarinces = np.array([np.eye(n_features) for _ in range(self.n_components)])
+        self.covariances = np.array([np.eye(n_features) for _ in range(self.n_components)])
     
     def gaussianPdf(self, X, mean, covariance):
         n_features = X.shape[1]
@@ -29,16 +29,23 @@ class GaussianMixtureModel:
     def expectationStep(self, X):
         n_samples = X.shape[0]
         responsibilities = np.zeros((n_samples, self.n_components))
-
         for k in range(self.n_components):
             responsibilities[:, k] = self.weights[k] * self._gaussian_pdf(X, self.means[k], self.covariances[k])
-
         total_responsibilities = responsibilities.sum(axis=1, keepdims=True)
         responsibilities /= total_responsibilities
         return responsibilities
     
-    def maximizationStep(self):
-        pass
+    def maximizationStep(self, X, responsibilities):
+        n_samples = X.shape[0]
+        for k in range(self.n_components):
+            resp_k = responsibilities[:, k]
+            total_resp_k = resp_k.sum()
+            
+            self.weights[k] = total_resp_k / n_samples
+            self.means[k] = np.sum(resp_k[:, np.newaxis] * X, axis=0) / total_resp_k
+
+            diff = X - self.means[k]
+            self.covariances[k] = np.dot((resp_k[:, np.newaxis] * diff).T, diff) / total_resp_k
     
     def fit(self):
         pass
