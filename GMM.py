@@ -26,8 +26,16 @@ class GaussianMixtureModel:
         diff = X - mean
         return normFactor * np.exp(-0.5 * np.sum(diff @ inv * diff, axis=1))
     
-    def expectationStep(self):
-        pass
+    def expectationStep(self, X):
+        n_samples = X.shape[0]
+        responsibilities = np.zeros((n_samples, self.n_components))
+
+        for k in range(self.n_components):
+            responsibilities[:, k] = self.weights[k] * self._gaussian_pdf(X, self.means[k], self.covariances[k])
+
+        total_responsibilities = responsibilities.sum(axis=1, keepdims=True)
+        responsibilities /= total_responsibilities
+        return responsibilities
     
     def maximizationStep(self):
         pass
