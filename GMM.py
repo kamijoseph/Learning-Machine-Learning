@@ -13,7 +13,7 @@ class GaussianMixtureModel:
         
     
     def initializeParameters(self, X):
-        n_samples, n_features = self.X.shape
+        n_samples, n_features = X.shape
         self.weights = np.ones(self.n_components) / self.n_components
         self.means = X[np.random.choice(n_samples, self.n_components, replace=False)]
         self.covariances = np.array([np.eye(n_features) for _ in range(self.n_components)])
@@ -21,7 +21,7 @@ class GaussianMixtureModel:
     def gaussianPdf(self, X, mean, covariance):
         n_features = X.shape[1]
         det = np.linalg.det(covariance)
-        inv = np.linalg.det(covariance)
+        inv = np.linalg.inv(covariance)
         normFactor = 1.0 / np.sqrt((2 * np.pi) ** n_features * det)
         diff = X - mean
         return normFactor * np.exp(-0.5 * np.sum(diff @ inv * diff, axis=1))
@@ -30,9 +30,9 @@ class GaussianMixtureModel:
         n_samples = X.shape[0]
         responsibilities = np.zeros((n_samples, self.n_components))
         for k in range(self.n_components):
-            responsibilities[:, k] = self.weights[k] * self._gaussian_pdf(X, self.means[k], self.covariances[k])
-        total_responsibilities = responsibilities.sum(axis=1, keepdims=True)
-        responsibilities /= total_responsibilities
+            responsibilities[:, k] = self.weights[k] * self.gaussianPdf(X, self.means[k], self.covariances[k])
+        totalResponsibilities = responsibilities.sum(axis=1, keepdims=True) + 1e-10
+        responsibilities /= totalResponsibilities
         return responsibilities
     
     def maximizationStep(self, X, responsibilities):
