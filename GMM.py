@@ -60,5 +60,6 @@ class GaussianMixtureModel:
             if meanShift < self.tol:
                 break
     
-    def predict(self):
-        pass
+    def predict(self, X):
+        responsibilities = self.expectationStep(X)
+        return np.argmax(responsibilities, axis=1)
