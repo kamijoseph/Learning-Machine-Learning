@@ -63,3 +63,26 @@ class GaussianMixtureModel:
     def predict(self, X):
         responsibilities = self.expectationStep(X)
         return np.argmax(responsibilities, axis=1)
+    
+np.random.seed(42)
+
+#generate synthetic 2D data
+n_samples = 300
+X1 = np.random.multivariate_normal(mean=[0, 0], cov=[[1, 0], [0, 1]], size=n_samples // 3)
+X2 = np.random.multivariate_normal(mean=[5, 5], cov=[[1, 0.5], [0.5, 1]], size=n_samples // 3)
+X3 = np.random.multivariate_normal(mean=[-5, 5], cov=[[1, -0.5], [-0.5, 1]], size=n_samples // 3)
+X = np.vstack([X1, X2, X3])
+
+#fitting GMM
+gmm = GaussianMixtureModel(n_components=3)
+gmm.fit(X)
+
+labels = gmm.predict(X)
+
+#visualizing
+import matplotlib.pyplot as plt
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis', s=30, alpha=0.7)
+plt.scatter(gmm.means[:, 0], gmm.means[:, 1], color='red', marker='x', s=100, label='Cluster Centers')
+plt.title("Gaussian Mixture Model Clustering")
+plt.legend()
+plt.show()
