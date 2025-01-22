@@ -47,8 +47,18 @@ class GaussianMixtureModel:
             diff = X - self.means[k]
             self.covariances[k] = np.dot((resp_k[:, np.newaxis] * diff).T, diff) / total_resp_k
     
-    def fit(self):
-        pass
+    def fit(self, X):
+        self.initializeParameters(X)
+
+        for iteration in range(self.maxIterations):
+            responsibilities = self.expectationStep(X)
+
+            prevMeans = self.means.copy()
+            self.maximizationStep(X, responsibilities)
+
+            meanShift = np.linalg.norm(self.means - prevMeans)
+            if meanShift < self.tol:
+                break
     
     def predict(self):
         pass
