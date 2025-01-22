@@ -24,6 +24,7 @@ class GaussianMixtureModel:
         inv = np.linalg.det(covariance)
         normFactor = 1.0 / np.sqrt((2 * np.pi) ** n_features * det)
         diff = X - mean
+        return normFactor * np.exp(-0.5 * np.sum(diff @ inv * diff, axis=1))
     
     def expectationStep(self):
         pass
