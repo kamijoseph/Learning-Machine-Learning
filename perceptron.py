@@ -1,6 +1,9 @@
 
 # implementing a perceptron algoritm in python
 import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
 
 def unitStepFunction(x):
     return np.where(x > 0, 1, 0)
@@ -37,3 +40,6 @@ class Perceptron:
             linearOutput = np.dot(X, self.weights) + self.bias
             yPredict = self.activationFunction(linearOutput)
             return yPredict
+
+if __name__ == "__main__":
+    pass
