@@ -49,5 +49,31 @@ if __name__ == "__main__":
         X, y, test_size=0.2, random_state=123
     )
     
-    def accuracyFunction():
+    pp = Perceptron(learningRate=0.01, nIterations=1000)
+    pp.fit(X_train, y_train)
+    predictions = pp.predict(X_test)
+    
+    def accuracyFunction(y_true, y_predict):
         return np.sum(y_true == y_predict) / len(y_true)
+    
+    print("Perceptron classification accuracy", accuracyFunction(y_test, predictions))
+    
+    # plotting the figure
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    plt.scatter(X_train[:, 0], X_train[:, 1], marker="o", c=y_train)
+    
+    x0_1 = np.amin(X_train[:, 0])
+    x0_2 = np.amax(X_train[:, 0])
+    
+    x1_1 = (-pp.weights[0] * [x0_1 - pp.bias]) /pp.weights[1]
+    x1_2 = (-pp.weights[0] * [x0_2 - pp.bias]) /pp.weights[1]
+    
+    ax.plot([x0_1, x0_2], [x1_1, x1_2], "k")
+    
+    ymin = np.amin(X_train[:, 1])
+    ymax = np.amax(X_train[:, 1])
+    
+    ax.set_ylim([ymin - 3, ymax + 3])
+    
+    plt.show()
