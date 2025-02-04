@@ -19,6 +19,14 @@ class Perceptron:
         
         self.weights = np.zeros(nFeatures)
         self.bias = 0
-    
+        y_ = np.where(y > 0, 1, 0)
+        
+        # learning weights
+        for _ in range(self.nIterations):
+            for idx, xi in enumerate(X):
+                linearOutput = np.dot(xi, self.weights) + self.bias
+                yPredict = self.activationFunction(linearOutput)
+        
+        
     def predict(self, X):
         pass
