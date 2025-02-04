@@ -15,7 +15,10 @@ class Perceptron:
         self.bias = None
     
     def fit(self, X, y):
-        pass
+        nSamples, nFeatures = X.shape
+        
+        self.weights = np.zeros(nFeatures)
+        self.bias = 0
     
     def predict(self, X):
         pass
