@@ -26,6 +26,11 @@ class Perceptron:
             for idx, xi in enumerate(X):
                 linearOutput = np.dot(xi, self.weights) + self.bias
                 yPredict = self.activationFunction(linearOutput)
+                
+                # perceptron update
+                update = self.learningRate * (y_[idx] - yPredict)
+                self.weights += update * xi
+                self.bias += update
         
         
     def predict(self, X):
