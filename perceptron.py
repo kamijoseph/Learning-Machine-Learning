@@ -34,4 +34,6 @@ class Perceptron:
         
         
     def predict(self, X):
-        pass
+            linearOutput = np.dot(X, self.weights) + self.bias
+            yPredict = self.activationFunction(linearOutput)
+            return yPredict
