@@ -42,4 +42,12 @@ class Perceptron:
             return yPredict
 
 if __name__ == "__main__":
-    pass
+    X, y = datasets.make_blobs(
+        n_samples=150, n_features=2, centers=2, cluster_std=1.05, random_state=2
+    )
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=123
+    )
+    
+    def accuracyFunction():
+        return np.sum(y_true == y_predict) / len(y_true)
