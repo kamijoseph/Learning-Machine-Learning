@@ -62,18 +62,12 @@ if __name__ == "__main__":
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     plt.scatter(X_train[:, 0], X_train[:, 1], marker="o", c=y_train)
-    
     x0_1 = np.amin(X_train[:, 0])
     x0_2 = np.amax(X_train[:, 0])
-    
     x1_1 = (-pp.weights[0] * x0_1 - pp.bias) /pp.weights[1]
     x1_2 = (-pp.weights[0] * x0_2 - pp.bias) /pp.weights[1]
-    
     ax.plot([x0_1, x0_2], [x1_1, x1_2], "k")
-    
     ymin = np.amin(X_train[:, 1])
     ymax = np.amax(X_train[:, 1])
-    
     ax.set_ylim([ymin - 3, ymax + 3])
-    
     plt.show()
