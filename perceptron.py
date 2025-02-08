@@ -10,7 +10,7 @@ def unitStepFunction(x):
 
 
 class Perceptron:
-    def __init__(self, learningRate=0.01, nIterations=1000):
+    def __init__(self, learningRate=0.01, nIterations=5000):
         self.learningRate = learningRate
         self.nIterations = nIterations
         self.activationFunction = unitStepFunction
